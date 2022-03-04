@@ -27,14 +27,14 @@
                     <div class="col-sm-12 about-address">
                         <address>
                             <p>
-                                | {{ setting.site_name }} <br>
-                                | تلفن تماس : {{ setting.site_phone }} <br>
-                                | آدرس : {{ setting.site_address }} <br>
+                                {{ setting.site_name }} <br>
+                                تلفن تماس : {{ setting.site_phone }} <br>
+                                آدرس : {{ setting.site_address }} <br>
                                 {% if setting.site_fax %}
-                                    |فکس : {{ setting.site_fax }}
+                                    فکس : {{ setting.site_fax }}
                                 {% endif %} 
                                 {% if setting.site_email %}
-                                    |ایمیـل : {{ setting.site_email }}
+                                    ایمیـل : {{ setting.site_email }}
                                 {% endif %}
                             </p>
                         </address>
