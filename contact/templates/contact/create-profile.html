@@ -23,12 +23,15 @@
                     <div class="contact-info">
                         <h2 class="title text-center">اطلاعات تماس</h2>
                         <address>
-                            <p>گـروه تکنوگـرافی 1614</p>
-                            <p>ایـران - آذربایجـان غربـی - خـوی</p>
-                            <p>مجتـمع تجـاری تفریحـی شمس - طبـقه 2 - پلاک 54</p>
-                            <p>تلفن تماس : 80 21 24 36 044</p>
-                            <p>فکس : 80 21 24 36 044</p>
-                            <p style="font-family: tahoma;">ایمیـل : info@1614GP.ir</p>
+                            <p>{{ setting.site_name }}</p>
+                            <p>{{ setting.site_address }}</p>
+                            <p>تلفن تماس : {{ setting.site_phone }}</p>
+                            {% if setting.site_fax %}
+                                <p>فکس : {{ setting.site_fax }}</p>
+                            {% endif %}
+                            {% if setting.email %}
+                                <p style="font-family: tahoma;">ایمیـل : {{ setting.email }}</p>
+                            {% endif %}
                         </address>
                         </div>
                     </div>
