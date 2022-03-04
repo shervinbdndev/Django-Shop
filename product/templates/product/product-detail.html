@@ -1,7 +1,11 @@
 {% extends 'product/base.html' %}
 {% load static %}
 {% block title %}
-    جزئیات {{ product_details.title }}
+    {% if product_details.title %}
+        جزئیات {{ product_details.title }}
+    {% else %}
+        جزئیات محصول
+    {% endif %}
 {% endblock %}
 {% block content %}
     <section>
