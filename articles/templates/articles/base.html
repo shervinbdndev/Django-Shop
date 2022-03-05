@@ -10,12 +10,12 @@
     <title>
 		{% block title %}{% endblock %}
 	</title>
-	{% include 'home/header-references.html' %}
+	{% include 'articles/header-references.html' %}
 </head>
 <body>
-	{% render_partial 'home.views.header_component' %}
+	{% render_partial 'articles.views.HeaderComponentView' %}
     {% block section %}{% endblock %}
-	{% render_partial 'home.views.footer_component' %}
-	{% include 'home/footer-references.html' %}
+	{% render_partial 'articles.views.FooterComponentView' %}
+	{% include 'articles/footer-references.html' %}
 </body>
 </html>

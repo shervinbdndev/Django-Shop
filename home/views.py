@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.http import HttpRequest
+from django.http.request import HttpRequest
+from django.views.generic.base import View
 from site_settings.models import (SiteSettings , FooterLinkBox , Slider)
 
 
@@ -29,14 +30,18 @@ class AboutView(TemplateView):
 
 
 
-def header_component(request : HttpRequest):
-    setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
-    return render(request=request , template_name='home/header-component.html' , context={'setting':setting})
+
+class HeaderComponentView(View):
+    def get(self , request : HttpRequest):
+        setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
+        return render(request=request , template_name='home/header-component.html' , context={'setting':setting})
 
 
-def footer_component(request : HttpRequest):
-    footer_link_box : FooterLinkBox = FooterLinkBox.objects.all()
-    setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
-    for item in footer_link_box:
-        item.footerlink_set
-    return render(request=request , template_name='home/footer-component.html' , context={'setting':setting,'footer_link_boxes':footer_link_box})
+
+class FooterComponentView(View):
+    def get(self , request : HttpRequest):
+        footer_link_box : FooterLinkBox = FooterLinkBox.objects.all()
+        setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
+        for item in footer_link_box:
+            item.footerlink_set
+        return render(request=request , template_name='home/footer-component.html' , context={'setting':setting,'footer_link_boxes':footer_link_box})

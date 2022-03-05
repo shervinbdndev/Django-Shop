@@ -44,14 +44,17 @@ class ProfilesView(ListView):
 
 
 
-def header_component(request : HttpResponse):
-    return render(request=request , template_name='contact/header-component.html' , context={})
+class HeaderComponentView(View):
+    def get(self , request : HttpResponse):
+        return render(request=request , template_name='contact/header-component.html' , context={})
 
 
 
-def footer_component(request : HttpResponse):
-    footer_link_boxes : FooterLinkBox = FooterLinkBox.objects.all()
-    setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
-    for item in footer_link_boxes:
-        item.footerlink_set
-    return render(request=request , template_name='contact/footer-component.html' , context={'setting':setting,'footer_link_boxes':footer_link_boxes})
+
+class FooterComponentView(View):
+    def get(self ,request : HttpResponse):
+        footer_link_boxes : FooterLinkBox = FooterLinkBox.objects.all()
+        setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
+        for item in footer_link_boxes:
+            item.footerlink_set
+        return render(request=request , template_name='contact/footer-component.html' , context={'setting':setting,'footer_link_boxes':footer_link_boxes})

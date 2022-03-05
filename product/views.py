@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
-from django.http import Http404
-from django.views import View
-from django.http import HttpRequest
+from django.http.response import Http404
+from django.views.generic.base import View
+from django.http.request import HttpRequest
 from django.views.generic.list import ListView
 from .models import Product
+from site_settings.models import (FooterLinkBox , SiteSettings)
 
 
 
@@ -29,15 +30,28 @@ class AddProductFavorite(View):
 
 
 
-def product_detail(request : HttpRequest , pk):
-    try:
-        product_details = Product.objects.get(id=pk)
-    except:
-        raise Http404()
-    return render(request=request , template_name='product/product-detail.html' , context={'product_details':product_details})
+class ProductDetailView(View):
+    def get(self , request : HttpRequest , pk):
+        try:
+            product_details = Product.objects.get(id=pk)
+        except:
+            raise Http404()
+        return render(request=request , template_name='product/product-detail.html' , context={'product_details':product_details})
 
 
 
 
-def header_component(request : HttpRequest):
-    return render(request=request , template_name='product/header-component.html' , context={})
+class HeaderComponentView(View):
+    def get(self , request : HttpRequest):
+        return render(request=request , template_name='accounts/header-component.html' , context={})
+
+
+
+
+class FooterComponentView(View):
+    def get(self , request : HttpRequest):
+        footer_link_boxes : FooterLinkBox = FooterLinkBox.objects.all()
+        setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
+        for item in footer_link_boxes:
+            item.footerlink_set
+        return render(request=request , template_name='accounts/footer-component.html' , context={'setting':setting,'footer_link_boxes':footer_link_boxes})

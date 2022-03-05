@@ -12,8 +12,9 @@
     {% include 'product/header-references.html' %}
 </head>
 <body>
-    {% render_partial 'product.views.header_component' %}
+    {% render_partial 'product.views.HeaderComponentView' %}
     {% block content %}{% endblock %}
+    {% render_partial 'product.views.FooterComponentView' %}
     {% include 'product/footer-references.html' %}
 </body>
 </html>

@@ -1,10 +1,12 @@
 from django.shortcuts import (redirect, render)
 from django.urls import reverse
-from django.views import View
-from django.http import (Http404 , HttpRequest, HttpResponse)
+from django.views.generic.base import View
+from django.http.response import Http404
+from django.http.request import HttpRequest
 from django.utils.crypto import get_random_string
 from django.contrib.auth import (login , logout)
 from utils.email_service import send_email
+from site_settings.models import (FooterLinkBox , SiteSettings)
 from .forms import (RegisterForm , LoginForm , ForgetPasswordForm , ResetPasswordForm)
 from .models import User
 
@@ -133,6 +135,25 @@ class ResetPasswordView(View):
 
 
 class LogoutView(View):
-    def get(self , request : HttpResponse):
+    def get(self , request : HttpRequest):
         logout(request=request)
         return redirect(to=reverse('login_page'))
+    
+    
+    
+    
+
+class HeaderComponentView(View):
+    def get(self , request : HttpRequest):
+        return render(request=request , template_name='accounts/header-component.html' , context={})
+
+
+
+
+class FooterComponentView(View):
+    def get(self , request : HttpRequest):
+        footer_link_boxes : FooterLinkBox = FooterLinkBox.objects.all()
+        setting : SiteSettings = SiteSettings.objects.filter(is_main_setting = True).first()
+        for item in footer_link_boxes:
+            item.footerlink_set
+        return render(request=request , template_name='accounts/footer-component.html' , context={'setting':setting,'footer_link_boxes':footer_link_boxes})

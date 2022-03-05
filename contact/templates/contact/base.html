@@ -9,12 +9,12 @@
     <title>
         {% block title %}{% endblock %}
     </title>
-    {% render_partial 'contact.views.header_component' %}
+    {% render_partial 'contact.views.HeaderComponentView' %}
     {% include 'contact/header-references.html' %}
 </head>
 <body>
     {% block content %}{% endblock %}
-    {% render_partial 'contact.views.footer_component' %}
+    {% render_partial 'contact.views.FooterComponentView' %}
     {% include 'contact/footer-references.html' %}
 </body>
 </html>
