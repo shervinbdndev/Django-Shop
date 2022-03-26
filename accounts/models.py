@@ -10,7 +10,10 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         super(User , self).__str__()
-        return self.get_full_name()
+        if (self.first_name is not '' and self.last_name is not ''):  
+            return self.get_full_name()
+        else:
+            return self.email
 
     class Meta:
         verbose_name = 'User'

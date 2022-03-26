@@ -71,7 +71,7 @@
                     </div>
                     <div class="mainmenu pull-right">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">خـانه</a></li>
+                            <li><a href="{% url 'home_page' %}" class="active">خـانه</a></li>
                             <li class="dropdown"><a href="#">فروشگـاه<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="shop.html">محصولات</a></li>
@@ -81,9 +81,9 @@
                                     <li><a href="login.html">ورود</a></li> 
                                 </ul>
                             </li> 
-                            <li class="dropdown"><a href="#">اخبـار<i class="fa fa-angle-down"></i></a>
+                            <li><a href="{% url 'articles_page' %}">مقالات</a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">آخریـن اخبـار</a></li>
+                                    <li><a href="blog.html">آخریـن مقالات</a></li>
                                     <li><a href="blog-single.html">صفحـه خبـر</a></li>
                                 </ul>
                             </li> 

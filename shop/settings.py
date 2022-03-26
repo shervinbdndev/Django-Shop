@@ -25,11 +25,12 @@ SHOP_APPS = [
     'accounts.apps.AccountsConfig',
     'site_settings.apps.SiteSettingsConfig',
     'articles.apps.ArticlesConfig',
+    'polls.apps.PollsConfig',
 ]
 
 EXTERNAL_APPS = [
     'django_render_partial',
-    'sorl.thumbnail',
+    'jalali_date',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + SHOP_APPS + EXTERNAL_APPS
@@ -63,6 +64,23 @@ TEMPLATES = [
         },
     },
 ]
+
+JALALI_DATE_DEFAULTS = {
+   'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            'admin/js/django_jalali.min.js',
+        ],
+        'css': {
+            'all': [
+                'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
+}
 
 WSGI_APPLICATION = 'shop.wsgi.application'
 

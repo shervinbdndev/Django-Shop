@@ -1,4 +1,6 @@
 {% extends 'home/base.html' %}
+{% load render_partial %}
+{% load poll_extras %}
 {% load static %}
 {% block title %}
 	لیست مقالات فروشگاه کار زیبا
@@ -15,9 +17,11 @@
                                 <h3>{{ article.title }}</h3>
                                 <div class="post-meta">
                                     <ul>
-                                        <li><i class="fa fa-user"></i> کاربـر 1</li>
-                                        <li><i class="fa fa-clock-o"></i> 17:20 ب.ظ</li>
-                                        <li><i class="fa fa-calendar"></i> 28 تیـر 1397</li>
+                                        {% if article.author is not None %}
+                                            <li><i class="fa fa-user"></i>{{ article.author }}</li>
+                                        {% endif %}
+                                        <!-- <li><i class="fa fa-clock-o"></i>{{ article.get_jalali_create_time }}</li>
+                                        <li><i class="fa fa-calendar"></i>{{ article.create_date | show_jalali_date }}</li> -->
                                     </ul>
                                     <span>
                                             <i class="fa fa-star"></i>
@@ -47,109 +51,7 @@
                 
                 <div class="col-sm-3">
                     <div class="left-sidebar">
-                        <h2>دسته بندی محصولات</h2>
-                        <div class="panel-group category-products" id="accordian">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            دسته 1
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="sportswear" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="">محصول 1 </a></li>
-                                            <li><a href="">محصول 2 </a></li>
-                                            <li><a href="">محصول 3 </a></li>
-                                            <li><a href="">محصول 4</a></li>
-                                            <li><a href="">محصول 5</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            دسته 2
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="mens" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="">محصول 1 </a></li>
-                                            <li><a href="">محصول 2 </a></li>
-                                            <li><a href="">محصول 3 </a></li>
-                                            <li><a href="">محصول 4</a></li>
-                                            <li><a href="">محصول 5</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 1</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 2</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 3</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 4</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 5</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 6</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 7</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="brands_products">
-                            <h2>برنـد ها</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href=""> <span class="pull-left">(50)</span>برنـد 1</a></li>
-                                    <li><a href=""> <span class="pull-left">(56)</span>برنـد 2</a></li>
-                                    <li><a href=""> <span class="pull-left">(27)</span>برنـد 3</a></li>
-                                    <li><a href=""> <span class="pull-left">(32)</span>برنـد 4</a></li>
-                                    <li><a href=""> <span class="pull-left">(5)</span>برنـد 5</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="price-range">
-                            <h2>فیلتـر قیمـت</h2>
-                            <div class="well">
-                                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="1000000" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                <b>1.000.000 ريال</b> <b class="pull-left">0 ريال</b>
-                            </div>
-                        </div>
-                        
+                        {% render_partial 'articles.views.ArticleCategoriesComponent' %}
                         <div class="shipping text-center">
                             <img src="{% static 'images/home/shipping.jpg' %}" alt="" />
                         </div>
