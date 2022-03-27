@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.http.request import HttpRequest
-from .models import (ArticleCategory , Article)
+from .models import (ArticleCategory , Article , ArticleComments)
 
 
 
@@ -26,3 +26,4 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(ArticleCategory , ArticleCategoryAdmin)
 admin.site.register(Article , ArticleAdmin)
+admin.site.register(ArticleComments)

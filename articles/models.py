@@ -32,18 +32,31 @@ class Article(models.Model):
     is_active = models.BooleanField(verbose_name='Active / Inactive' , default=True)
     selected_categories = models.ManyToManyField(to=ArticleCategory , verbose_name='Categories')
     author = models.ForeignKey(to=User , on_delete=models.CASCADE , verbose_name='Author' , null=True , editable=False)
-    created_at = models.DateTimeField(auto_now_add=True , editable=False , verbose_name='Created At')
+    # created_at = models.DateTimeField(auto_now_add=True , blank=True , editable=False , verbose_name='Created At')
     
     def __str__(self) -> str:
         super(Article , self).__str__()
         return self.title
     
-    def get_jalali_create_date(self):
-        return date2jalali(g_date=self.created_at)
+    # def get_jalali_create_date(self):
+    #     return date2jalali(g_date=self.created_at)
     
-    def get_jalali_create_time(self):
-        return datetime2jalali(g_date=self.created_at.strftime(format='%H:%M'))
+    # def get_jalali_create_time(self):
+    #     return datetime2jalali(g_date=self.created_at.strftime(format='%H:%M'))
     
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+        
+        
+        
+
+class ArticleComments(models.Model):
+    article = models.ForeignKey(to=Article , on_delete=models.CASCADE , verbose_name='Article')
+    parent = models.ForeignKey(to='ArticleComments' , on_delete=models.CASCADE ,  null=True , blank=True , verbose_name='Parent')
+    user = models.ForeignKey(to=User , on_delete=models.CASCADE , verbose_name='User')
+    text = models.TextField(verbose_name='Text')
+    
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'

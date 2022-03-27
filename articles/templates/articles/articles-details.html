@@ -1,0 +1,146 @@
+{% extends 'articles/base.html' %}
+{% load render_partial %}
+{% load poll_extras %}
+{% load static %}
+{% block title %}
+	لیست مقالات فروشگاه کار زیبا
+{% endblock %}
+{% block section %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+                        <h2 class="title text-center">{{ article.title }}</h2>
+                        <div class="single-blog-post">
+                            <h3>{{ article.title }}</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    {% if article.author %}
+                                        <li><i class="fa fa-user"></i>{{ article.author }}</li>
+                                    {% endif %}
+                                    <li><i class="fa fa-clock-o"></i></li>
+                                    <li><i class="fa fa-calendar"></i></li>
+                                </ul>
+                                <span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                </span>
+                            </div>
+                            <a href="">
+                                <img src="{{ article.image.url }}" alt="">
+                            </a>
+                            <p>{{ article.short_description }}</p>
+                            <p>{{ article.text }}</p>
+                        </div>
+                    </div>
+                    {% if article.author %}
+                        <div class="media commnets">
+                            <a class="pull-right" href="#">
+                                {% if article.author.avatar %}
+                                    <img class="media-object" src="{{ article.image.url }}" alt="">
+                                {% else %}
+                                    <img class="media-object" src="{% static 'images/blog/Customer.jpg' %}" alt="">
+                                {% endif %}
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"> : نویسنده{{ article.author }}</h4>
+                                <p>{{ article.author.about_user }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="response-area">
+                        <h2>پاسخ ها (3)</h2>
+                        <ul class="media-list">
+                            <li class="media">
+                                
+                                <a class="pull-right" href="#">
+                                    <img class="media-object" src="{% static 'images/blog/Customer.jpg' %}" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <ul class="sinlge-post-meta">
+                                        <li><i class="fa fa-user"></i>مشتـری شمـاره 1</li>
+                                        <li><i class="fa fa-clock-o"></i> 13:33 ب.ظ</li>
+                                        <li><i class="fa fa-calendar"></i> 25 تیـر 1397</li>
+                                    </ul>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                                    <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>پاسـخ</a>
+                                </div>
+                            </li>
+                            <li class="media second-media">
+                                <a class="pull-right" href="#">
+                                    <img class="media-object" src="{% static 'images/blog/Customer.jpg' %}" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <ul class="sinlge-post-meta">
+                                        <li><i class="fa fa-user"></i>مشتـری شمـاره 1</li>
+                                        <li><i class="fa fa-clock-o"></i> 13:33 ب.ظ</li>
+                                        <li><i class="fa fa-calendar"></i> 25 تیـر 1397</li>
+                                    </ul>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                                    <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>پاسـخ</a>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <a class="pull-right" href="#">
+                                    <img class="media-object" src="{% static 'images/blog/Customer.jpg' %}" alt="">
+                                </a>
+                                <div class="media-body">
+                                    <ul class="sinlge-post-meta">
+                                        <li><i class="fa fa-user"></i>مشتـری شمـاره 1</li>
+                                        <li><i class="fa fa-clock-o"></i> 13:33 ب.ظ</li>
+                                        <li><i class="fa fa-calendar"></i> 25 تیـر 1397</li>
+                                    </ul>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                                    <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>پاسـخ</a>
+                                </div>
+                            </li>
+                        </ul>					
+                    </div>
+                    <div class="replay-box">
+                        <div class="row">
+                            
+                            <div class="col-sm-8">
+                                <div class="text-area">
+                                    <div class="blank-arrow">
+                                        <label>متن پیام</label>
+                                    </div>
+                                    <span>*</span>
+                                    <textarea name="message" rows="11"></textarea>
+                                    <a class="btn btn-primary" href="">ارسـال نظـر</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h2>نظـر خود را بنویسیـد</h2>
+                                <form>
+                                    <div class="blank-arrow">
+                                        <label>نام</label>
+                                    </div>
+                                    <span>*</span>
+                                    <input type="text" placeholder="نام شما ...">
+                                    <div class="blank-arrow">
+                                        <label>آدرس ایمیـل</label>
+                                    </div>
+                                    <span>*</span>
+                                    <input type="email" placeholder="ایمیـل شما ...">
+                                    <div class="blank-arrow">
+                                        <label>وبسایت</label>
+                                    </div>
+                                    <input type="email" placeholder="آدرس وبسایـت">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        {% render_partial 'articles.views.ArticleCategoriesComponent' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

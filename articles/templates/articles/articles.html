@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %}
+{% extends 'articles/base.html' %}
 {% load render_partial %}
 {% load poll_extras %}
 {% load static %}
@@ -20,8 +20,8 @@
                                         {% if article.author is not None %}
                                             <li><i class="fa fa-user"></i>{{ article.author }}</li>
                                         {% endif %}
-                                        <!-- <li><i class="fa fa-clock-o"></i>{{ article.get_jalali_create_time }}</li>
-                                        <li><i class="fa fa-calendar"></i>{{ article.create_date | show_jalali_date }}</li> -->
+                                        <li><i class="fa fa-clock-o"></i></li>
+                                        <li><i class="fa fa-calendar"></i></li>
                                     </ul>
                                     <span>
                                             <i class="fa fa-star"></i>
@@ -35,20 +35,22 @@
                                     <img src="{{ article.image.url }}" alt="">
                                 </a>
                                 <p>{{ article.short_description }}</p>
-                                <a  class="btn btn-primary" href="">ادامـه مطلب</a>
+                                <a  class="btn btn-primary" href="{% url 'articles_detail' pk=article.id %}">ادامـه مطلب</a>
                             </div>
                         {% endfor %}
-                        <div class="pagination-area">
-                            <ul class="pagination">
-                                <li><a href="" class="active">1</a></li>
-                                <li><a href="">2</a></li>
-                                <li><a href="">3</a></li>
-                                <li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
-                            </ul>
-                        </div>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}">قبلی</a></li>
+                            {% endif %}
+                            {% for page in paginator.page_range %}
+                                <li class="{% if page_obj.number == page  %} active {% else %}{% endif %}"><a href="?page={{ page }}">{{ page }}</a></li>
+                            {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}">بعدی</a></li>
+                        {% endif %}
+                        </ul>
                     </div>
                 </div>
-                
                 <div class="col-sm-3">
                     <div class="left-sidebar">
                         {% render_partial 'articles.views.ArticleCategoriesComponent' %}

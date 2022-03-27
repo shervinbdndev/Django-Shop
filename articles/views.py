@@ -2,8 +2,8 @@ from typing import (Any , Dict)
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.http.request import HttpRequest
-from jalali_date import datetime2jalali
 from .models import Article, ArticleCategory
 
 
@@ -20,10 +20,24 @@ class ArticlesListView(ListView):
     
     def get_queryset(self):
         query = super(ArticlesListView , self).get_queryset()
+        query = query.filter(is_active=True)
         category_name = self.kwargs.get('category')
         if (category_name is not None):
             query = query.filter(selected_categories__url_title__iexact=category_name)
         return query
+    
+    
+    
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'articles/articles-details.html'
+    
+    def get_queryset(self):
+        query = super(ArticleDetailView , self).get_queryset()
+        query = query.filter(is_active=True)
+        return query
+
     
     
 
@@ -35,7 +49,7 @@ class HeaderComponentView(View):
 
 
 
-class HeaderComponentView(View):
+class FooterComponentView(View):
     def get(self , request : HttpRequest):
         return render(request=request , template_name='articles/footer-component.html' , context={})
     
